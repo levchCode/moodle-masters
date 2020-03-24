@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Курсы ИГХТУ</title>
+    </head>
+    <body>
+        <h1>Список курсов</h1>
+        <br>
+        Поиск: <input type="text"> <input type="button" value="Искать">
+        <br>
+        <br>
+        <table border="1">
+            <tr>
+                <th>Курс</th>
+                <th>Оценка</th>
+            </tr>
+            {% for c in cs %}
+            <tr> 
+                <td>
+                    <a href="/course?id={{ c.id }}">{{ c.name }}</a>
+                </td>
+                <td>
+                    {{ c.score }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

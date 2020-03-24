@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>Курсы ИГХТУ</title>
+    </head>
+    <body>
+        <h1>Название курса</h1>
+
+        <h2>Общая оценка {{ c.overall }}</h2>
+        <br>
+
+        <h3>Общие сведения</h3>
+        <p>Создатель: {{ c.general.creator }}</p>
+        <p>Соучастники:</p>
+            <table border="1">
+                {% for t in c.general.cocreators %}
+                <tr><td>{{ t }}</td></tr>
+                {% endfor %}
+            </table>
+        <p>Дата последних действий: {{ c.general.last_changes }}</p>
+        <p>Частота обращений (создатель и соучастники) [последние 7 дней]: {{ c.general.creators_access_freq }}</p>
+        <p>Количество студентов: {{ c.general.students }}</p>
+        <p>Количество обращений студентов к курсу [последние 7 дней]: {{ c.general.students_access_freq }}</p>
+        <br>
+
+        <h3>Содержание</h3>
+
+        <p>Аннотация курса: {{ c.content.short }}</p>
+        <p>Количество пустых модулей: {{ c.content.empty_modules }}</p>
+        <p>Расписание: {{ c.content.schedule }}</p>
+        <p>План курса: {{ c.content.plan }}</p>
+        <p>
+            Список литературы: {{ c.content.books }} 
+            {% if c.content.books == 'есть'%}
+            (найдено: {{ c.content.books_count }})
+            {% endif %}
+        </p>
+        <p>
+            Методички, учебники и PDF: {{ c.content.booklet }}
+            {% if c.content.booklet == 'есть' %}
+            (найдено: {{ c.content.booklet_count }})
+            {% endif %}
+        </p>
+        <p>
+            Конспекты лекций: {{ c.content.lecture_notes }}
+            {% if c.content.lecture_notes == 'есть' %}
+            (найдено: {{ c.content.lecture_notes_count }})
+            {% endif %}
+        </p>
+        <p>
+            Презентации лекций: {{ c.content.presentation }}
+            {% if c.content.presentation == 'есть' %}
+            (найдено: {{ c.content.presentation_count }})
+            {% endif %}
+        </p>
+        <p>Вопроcы к экзамену/зачёту: {{ c.content.final_questions }}</p>
+        <p>
+            Задания для самостоятельной работы: {{ c.content.hometask }}
+            {% if c.content.hometask == 'есть' %}
+            (найдено: {{ c.content.hometask_count }})
+            {% endif %}
+        </p>
+        <p>
+            Наличие форума и активность: {{ c.content.forum }}
+            {% if c.content.forum == 'есть' %}
+            (постов: {{ c.content.forum_posts }}, комментариев: {{ c.content.forum_comments }})
+            {% endif %}
+        </p>
+        <p>
+            Наличие чата и активность: {{ c.content.chat }}
+            {% if c.content.chat == 'есть' %}
+            (сообщений: {{c.content.chat_messages}})
+            {% endif %}
+        </p>
+        <p>
+            Тесты: {{ c.content.test }}
+            {% if c.content.test == 'есть' %}
+            (найдено: {{ c.content.test_count }})
+            {% endif %}
+        </p>
+    </body>
+</html>
