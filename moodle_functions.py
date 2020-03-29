@@ -1,14 +1,30 @@
 import requests
+import json
+
+key = "d60e03e078e538a5f7c52688a48fed8f"
 
 def get_courses_list():
-    #Черная магия с мудлом
-    return [
-        {"id": 1, "name": "Инженерия ИС", "score": 1.2},
-        {"id": 2, "name": "Формальные языки и грамматики", "score": 4},
-    ]
+    request_URL = "http://192.168.2.224/moodle/webservice/rest/server.php?wsfunction=core_course_get_courses_by_field&wstoken={0}&moodlewsrestformat=json".format(key)
+    resp = requests.get(request_URL)
+    resp = json.loads(resp.text)
+
+    course_list = resp["courses"][1:]
+
+    data = []
+    for c in course_list:
+        c_entry = {}
+        c_entry["id"] = c["id"]
+        c_entry["name"] = c["fullname"]
+        data.append(c_entry)
+
+    return data
 
 def get_course(c_id):
-    #Черная магия с мудлом
+
+    request_URL = "http://192.168.2.224/moodle/webservice/rest/server.php?wstoken={0}&moodlewsrestformat=json&wsfunction=core_course_get_contents&courseid={1}".format(key, c_id)
+    resp = requests.get(request_URL)
+    resp = json.loads(resp.text)
+    
 
     return {
         "overall": 1.2,
