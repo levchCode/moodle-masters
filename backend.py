@@ -14,7 +14,7 @@ def index():
 
 @app.route("/course", methods=["GET"])
 def course():
-    c_id = request.form.get('id')
+    c_id = request.args.get('id')
     course = get_course(c_id)
     return render_template('course.html', c=course)
 
